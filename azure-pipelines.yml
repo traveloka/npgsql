@@ -26,9 +26,9 @@ steps:
 - script: dotnet pack src/Npgsql/Npgsql.csproj -c ReleaseOptimizedCryptography
   displayName: Pack Npgsql
 - script: dotnet pack src/Npgsql.Json.NET/Npgsql.Json.NET.csproj -c Release
-  displayName: Npgsql.Json.NET
+  displayName: Pack Npgsql.Json.NET
 - script: dotnet pack src/Npgsql.NodaTime/Npgsql.NodaTime.csproj -c Release
-  displayName: Npgsql.NodaTime
+  displayName: Pack Npgsql.NodaTime
 - script: dotnet pack src/Npgsql.LegacyPostgis/Npgsql.LegacyPostgis.csproj -c Release
   displayName: Pack Npgsql.LegacyPostgis
 - script: dotnet pack src/Npgsql.RawPostgis/Npgsql.RawPostgis.csproj -c Release
@@ -37,7 +37,8 @@ steps:
   displayName: Pack Npgsql.NetTopologySuite
 
 - task: DotNetCoreCLI@2
-  displayName: Publish to NuGet Feed
+  displayName: Publish to azure packages
   inputs:
     command: 'push'
+    packagesToPush: 'src/**/*.nupkg'
     feedPublish: 'tvlk-ecb'
