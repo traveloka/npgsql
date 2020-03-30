@@ -23,7 +23,7 @@ steps:
     packageType: 'sdk'
     version: '2.2.207'
 
-- script: dotnet pack src\Npgsql\Npgsql.csproj -c ReleaseOptimizedCryptography
+- script: dotnet pack src/Npgsql/Npgsql.csproj -c ReleaseOptimizedCryptography
   displayName: Pack Npgsql
 #  inputs:
 #    command: 'pack'
