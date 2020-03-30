@@ -18,10 +18,10 @@ variables:
 
 steps:
 - task: DotNetCoreInstaller@0
-  displayName: Install .NET Core 2.2
+  displayName: Install .NET Core 2.2.207 with 2.2.8 runtime
   inputs:
     packageType: 'sdk'
-    version: '2.2.102'
+    version: '2.2.207'
 
 - task: DotNetCoreCLI@2
   displayName: Pack into NuGet Package
