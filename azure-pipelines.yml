@@ -17,18 +17,48 @@ variables:
   projects: 'src/Npgsql/**/*.csproj'
 
 steps:
-- task: DotNetCoreInstaller@0
+- task: DotNetCoreInstaller@2
   displayName: Install .NET Core 2.2.207 with 2.2.8 runtime
   inputs:
     packageType: 'sdk'
     version: '2.2.207'
 
 - task: DotNetCoreCLI@2
-  displayName: Pack into NuGet Package
+  displayName: Pack Npgsql
   inputs:
     command: 'pack'
-    configuration: $(buildConfiguration)
-    projects: '$(projects)'
+    configuration: 'ReleaseOptimizedCryptography'
+    projects: 'src/Npgsql/Npgsql.csproj'
+- task: DotNetCoreCLI@2
+  displayName: Pack Npgsql.Json.NET
+  inputs:
+    command: 'pack'
+    configuration: 'Release'
+    projects: 'src/Npgsql.Json.NET/Npgsql.Json.NET.csproj'
+- task: DotNetCoreCLI@2
+  displayName: Pack Npgsql.NodaTime
+  inputs:
+    command: 'pack'
+    configuration: 'Release'
+    projects: 'src/Npgsql.NodaTime/Npgsql.NodaTime.csproj'
+- task: DotNetCoreCLI@2
+  displayName: Pack Npgsql.LegacyPostgis
+  inputs:
+    command: 'pack'
+    configuration: 'Release'
+    projects: 'src/Npgsql.LegacyPostgis/Npgsql.LegacyPostgis.csproj'
+- task: DotNetCoreCLI@2
+  displayName: Pack Npgsql.RawPostgis
+  inputs:
+    command: 'pack'
+    configuration: 'Release'
+    projects: 'src/Npgsql.RawPostgis/Npgsql.RawPostgis.'
+- task: DotNetCoreCLI@2
+  displayName: Npgsql.NetTopologySuite
+  inputs:
+    command: 'pack'
+    configuration: 'Release'
+    projects: 'src/Npgsql.NetTopologySuite/Npgsql.NetTopologySuite.csproj'
 
 - task: DotNetCoreCLI@2
   condition: eq(variables['Build.SourceBranchName'], 'master')
@@ -36,4 +66,3 @@ steps:
   inputs:
     command: 'push'
     feedPublish: 'tvlk-ecb'
-    projects: '$(projects)'

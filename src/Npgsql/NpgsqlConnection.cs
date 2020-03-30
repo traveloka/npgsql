@@ -360,6 +360,7 @@ namespace Npgsql
             }
         }
 
+#nullable    enable
         /// <summary>
         /// Gets or sets the delegate used to generate a password for new database connections.
         /// </summary>
@@ -373,7 +374,8 @@ namespace Npgsql
         /// is opened, not when reusing a connection that was previously opened from the pool.
         /// </remarks>
         public ProvidePasswordCallback? ProvidePasswordCallback { get; set; }
-
+#nullable    disable
+        
         #endregion Connection string management
 
         #region Configuration settings
