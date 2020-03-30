@@ -25,45 +25,20 @@ steps:
 
 - script: dotnet pack src/Npgsql/Npgsql.csproj -c ReleaseOptimizedCryptography
   displayName: Pack Npgsql
-#  inputs:
-#    command: 'pack'
-#    configuration: 'ReleaseOptimizedCryptography'
-#    projects: 'src/Npgsql/Npgsql.csproj'
-#    verbosityPack: 'normal'
-#- task: DotNetCoreCLI@2
-#  displayName: Pack Npgsql.Json.NET
-#  inputs:
-#    command: 'pack'
-#    configuration: 'Release'
-#    projects: 'src/Npgsql.Json.NET/Npgsql.Json.NET.csproj'
-#- task: DotNetCoreCLI@2
-#  displayName: Pack Npgsql.NodaTime
-#  inputs:
-#    command: 'pack'
-#    configuration: 'Release'
-#    projects: 'src/Npgsql.NodaTime/Npgsql.NodaTime.csproj'
-#- task: DotNetCoreCLI@2
-#  displayName: Pack Npgsql.LegacyPostgis
-#  inputs:
-#    command: 'pack'
-#    configuration: 'Release'
-#    projects: 'src/Npgsql.LegacyPostgis/Npgsql.LegacyPostgis.csproj'
-#- task: DotNetCoreCLI@2
-#  displayName: Pack Npgsql.RawPostgis
-#  inputs:
-#    command: 'pack'
-#    configuration: 'Release'
-#    projects: 'src/Npgsql.RawPostgis/Npgsql.RawPostgis.'
-#- task: DotNetCoreCLI@2
-#  displayName: Npgsql.NetTopologySuite
-#  inputs:
-#    command: 'pack'
-#    configuration: 'Release'
-#    projects: 'src/Npgsql.NetTopologySuite/Npgsql.NetTopologySuite.csproj'
-#
-#- task: DotNetCoreCLI@2
-#  condition: eq(variables['Build.SourceBranchName'], 'master')
-#  displayName: Publish to NuGet Feed
-#  inputs:
-#    command: 'push'
-#    feedPublish: 'tvlk-ecb'
+- script: dotnet src/Npgsql.Json.NET/Npgsql.Json.NET.csproj -c Release
+  displayName: Npgsql.Json.NET
+- script: dotnet pack src/Npgsql.NodaTime/Npgsql.NodaTime.csproj -c Release
+  displayName: Npgsql.NodaTime
+- script: dotnet pack src/Npgsql.LegacyPostgis/Npgsql.LegacyPostgis.csproj -c Release
+  displayName: Pack Npgsql.LegacyPostgis
+- script: dotnet pack src/Npgsql.RawPostgis/Npgsql.RawPostgis.csproj -c Release
+  displayName: Pack Npgsql.RawPostgis
+- script: dotnet pack src/Npgsql.NetTopologySuite/Npgsql.NetTopologySuite.csproj -c Release
+  displayName: Pack Npgsql.NetTopologySuite
+
+- task: DotNetCoreCLI@2
+  condition: eq(variables['Build.SourceBranchName'], 'master')
+  displayName: Publish to NuGet Feed
+  inputs:
+    command: 'push'
+    feedPublish: 'tvlk-ecb'
