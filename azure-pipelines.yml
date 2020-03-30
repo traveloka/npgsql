@@ -25,7 +25,7 @@ steps:
 
 - script: dotnet pack src/Npgsql/Npgsql.csproj -c ReleaseOptimizedCryptography
   displayName: Pack Npgsql
-- script: dotnet src/Npgsql.Json.NET/Npgsql.Json.NET.csproj -c Release
+- script: dotnet pack src/Npgsql.Json.NET/Npgsql.Json.NET.csproj -c Release
   displayName: Npgsql.Json.NET
 - script: dotnet pack src/Npgsql.NodaTime/Npgsql.NodaTime.csproj -c Release
   displayName: Npgsql.NodaTime
