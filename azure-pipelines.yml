@@ -24,12 +24,6 @@ steps:
     version: '2.2.102'
 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet build $(buildConfiguration)'
-  inputs:
-    command: 'build'
-    arguments: '--configuration $(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
   displayName: Pack into NuGet Package
   inputs:
     command: 'pack'
