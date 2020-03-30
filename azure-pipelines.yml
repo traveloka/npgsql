@@ -13,8 +13,10 @@ pool:
   name: Default
 
 variables:
+  npgsql:
+    configuration: 'ReleaseOptimizedCryptography'
   buildConfiguration: 'Release'
-  projects: 'src/Npgsql/**/*.csproj'
+  projects: 'src/Npgsql*/*.csproj'
 
 steps:
 - task: DotNetCoreInstaller@2
@@ -29,40 +31,40 @@ steps:
     command: 'pack'
     configuration: 'ReleaseOptimizedCryptography'
     projects: 'src/Npgsql/Npgsql.csproj'
-- task: DotNetCoreCLI@2
-  displayName: Pack Npgsql.Json.NET
-  inputs:
-    command: 'pack'
-    configuration: 'Release'
-    projects: 'src/Npgsql.Json.NET/Npgsql.Json.NET.csproj'
-- task: DotNetCoreCLI@2
-  displayName: Pack Npgsql.NodaTime
-  inputs:
-    command: 'pack'
-    configuration: 'Release'
-    projects: 'src/Npgsql.NodaTime/Npgsql.NodaTime.csproj'
-- task: DotNetCoreCLI@2
-  displayName: Pack Npgsql.LegacyPostgis
-  inputs:
-    command: 'pack'
-    configuration: 'Release'
-    projects: 'src/Npgsql.LegacyPostgis/Npgsql.LegacyPostgis.csproj'
-- task: DotNetCoreCLI@2
-  displayName: Pack Npgsql.RawPostgis
-  inputs:
-    command: 'pack'
-    configuration: 'Release'
-    projects: 'src/Npgsql.RawPostgis/Npgsql.RawPostgis.'
-- task: DotNetCoreCLI@2
-  displayName: Npgsql.NetTopologySuite
-  inputs:
-    command: 'pack'
-    configuration: 'Release'
-    projects: 'src/Npgsql.NetTopologySuite/Npgsql.NetTopologySuite.csproj'
-
-- task: DotNetCoreCLI@2
-  condition: eq(variables['Build.SourceBranchName'], 'master')
-  displayName: Publish to NuGet Feed
-  inputs:
-    command: 'push'
-    feedPublish: 'tvlk-ecb'
+#- task: DotNetCoreCLI@2
+#  displayName: Pack Npgsql.Json.NET
+#  inputs:
+#    command: 'pack'
+#    configuration: 'Release'
+#    projects: 'src/Npgsql.Json.NET/Npgsql.Json.NET.csproj'
+#- task: DotNetCoreCLI@2
+#  displayName: Pack Npgsql.NodaTime
+#  inputs:
+#    command: 'pack'
+#    configuration: 'Release'
+#    projects: 'src/Npgsql.NodaTime/Npgsql.NodaTime.csproj'
+#- task: DotNetCoreCLI@2
+#  displayName: Pack Npgsql.LegacyPostgis
+#  inputs:
+#    command: 'pack'
+#    configuration: 'Release'
+#    projects: 'src/Npgsql.LegacyPostgis/Npgsql.LegacyPostgis.csproj'
+#- task: DotNetCoreCLI@2
+#  displayName: Pack Npgsql.RawPostgis
+#  inputs:
+#    command: 'pack'
+#    configuration: 'Release'
+#    projects: 'src/Npgsql.RawPostgis/Npgsql.RawPostgis.'
+#- task: DotNetCoreCLI@2
+#  displayName: Npgsql.NetTopologySuite
+#  inputs:
+#    command: 'pack'
+#    configuration: 'Release'
+#    projects: 'src/Npgsql.NetTopologySuite/Npgsql.NetTopologySuite.csproj'
+#
+#- task: DotNetCoreCLI@2
+#  condition: eq(variables['Build.SourceBranchName'], 'master')
+#  displayName: Publish to NuGet Feed
+#  inputs:
+#    command: 'push'
+#    feedPublish: 'tvlk-ecb'
