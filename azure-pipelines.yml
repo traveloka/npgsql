@@ -13,8 +13,6 @@ pool:
   name: Default
 
 variables:
-  npgsql:
-    configuration: 'ReleaseOptimizedCryptography'
   buildConfiguration: 'Release'
   projects: 'src/Npgsql*/*.csproj'
 
